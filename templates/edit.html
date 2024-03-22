@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2><a href = "/">view applications</a></h2>
+    <h2>{% block title %} Edit "{{ post['app_name'] }}" {% endblock %}</h2>
+    <form method="post">
+        <label for="app_name">Name</label>
+        <br>
+        <input type="text" name="app_name"
+               placeholder="Post app_name"
+               value="{{ request.form['app_name'] or post['app_name'] }}"></input>
+        <br>
+
+        <label for="email">Post Email</label>
+        <br>
+        <textarea name="email"
+                  placeholder="Post email"
+                  rows="15"
+                  cols="60"
+                  >{{ request.form['email'] or post['email'] }}</textarea>
+        <br>
+
+        <label for="job_title">Post JobTitle</label>
+        <br>
+        <textarea name="job_title"
+                  placeholder="Post job_title"
+                  rows="15"
+                  cols="60"
+                  >{{ request.form['job_title'] or post['job_title'] }}</textarea>
+        <br>
+
+        <label for="job_description">Post Jobdescription</label>
+        <br>
+        <textarea name="job_description"
+                  placeholder="Post job_description"
+                  rows="15"
+                  cols="60"
+                  >{{ request.form['job_description'] or post['job_description'] }}</textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+   
+
+    <hr>
+    <form action="{{ url_for('delete', id=post['id']) }}" method="POST">
+        <input type="submit" value="Delete Application"
+                onclick="return confirm('Are you sure you want to delete this application?')">
+    </form>
+
+{% endblock %}
